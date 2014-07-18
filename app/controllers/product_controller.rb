@@ -92,9 +92,9 @@ class ProductController < ApplicationController
     if item.quantity >= params[:itemquantity].to_i
       item.quantity = item.quantity - params[:itemquantity].to_i
         item.save
-      render plain: "Order placed successfully"
+      render plain: "Order placed successfully" + "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     else
-      render plain: "Quantity not available !"
+      render plain: "Quantity not available !" + "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     end
 
   end
@@ -103,7 +103,7 @@ class ProductController < ApplicationController
     if params[:id]!=nil
       @profile = User.find(params[:id].to_i).profile.all
     else 
-      render plain: "ERROR OCCURRED"
+      render plain: "ERROR OCCURRED" + "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     end
   end
 
@@ -117,9 +117,9 @@ class ProductController < ApplicationController
     item.quantity = item.quantity - itemquantity;
     if item.save
       Profile.find(profileid).account.create(:item_id=>itemid , :delieverytype=>"Home delievery" , :status=>"In progress" , :quantity=>itemquantity);
-      render plain: "successfully done"
+      render plain: "successfully done"+ "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     else  
-      render "order failed"
+      render "order failed"+ "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     end
 
   end
@@ -139,9 +139,9 @@ class ProductController < ApplicationController
 
     if item.save
       Profile.find(profileid).account.create(:item_id=>itemid , :delieverytype=>"Home delievery" , :status=>"In progress" , :quantity=>itemquantity);
-      render plain: "successfully done"
+      render plain: "successfully done"+ "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     else  
-      render "order failed! check the quantity and initials"
+      render "order failed! check the quantity and initials"+ "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     end
   end
   def confirmpickupajax
@@ -159,9 +159,9 @@ class ProductController < ApplicationController
 
     item.pickup = [Pickup.last]
      if item.save
-      render plain: "Saved Successfully"
+      render plain: "Saved Successfully" + "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     else 
-      render plain: "Error occurred"
+      render plain: "Error occurred" + "<meta http-equiv='refresh' content='2; url=http://localhost:3000/product' />"
     end
   end
   private
