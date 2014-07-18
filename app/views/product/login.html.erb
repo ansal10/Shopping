@@ -1,0 +1,14 @@
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+<h1>Welcome to signin page</h1>
+<%=form_for(:user ,:url => {:controller => 'product' , :action => 'userlogin'} ) do |f| %>
+	<p>Username: <%= f.text_field :username%></p>
+	<p>Password: <%= f.password_field :password%></p>
+	<%if @userlogin.present?%>
+	<% @userlogin.each do |x|%>
+		<p><%=x%></p>
+	<%end%>
+	<%end%>
+	<p><%= f.submit "Signin"%></p>
+	<%end%>
+	<%= link_to "GOBACK" ,'/product'%>

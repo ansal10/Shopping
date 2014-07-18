@@ -1,0 +1,26 @@
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+
+<%if session[:username] == "anas"%>
+<h1> Welcome Admin to Add new Elements </h1>
+<%= form_for(@item , :url =>{:controller => 'product' , :action => 'addnewelements'}) do |f| %>
+	Item Name: <%=f.text_field :name%><br>
+	Brand : <%=f.text_field :company%><br>
+	Mrp : <%=f.text_field :mrp%><br>
+	Discount: <%=f.text_field :discount%><br>
+	Quantity: <%=f.text_field :quantity%><br>
+	Link to Image: <%=f.text_field :image%><br>
+	<%=f.submit "add to database"%><br>
+	<%end%>
+
+	<% if @item.errors.any? %>
+		<% @item.errors.full_messages.each do |x| %>
+		<%= x %><br>
+		<%end%>
+	<%end%>
+	
+<% else%>
+<h1> you are not authorised to this page </h1>
+<% end %>
+
+<%= link_to "GOBACK" ,'/product'%>

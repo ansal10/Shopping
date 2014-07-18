@@ -1,0 +1,26 @@
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+<h1> welcome to signup page </h1>
+
+<%= form_for(@user , :url => {:controller =>'product' , :action => 'createuser'}) do |f| %>
+	<p> Username :  <%= f.text_field :username%> </p>
+	<p> Email : <%=f.text_field :email%> </p>
+	<p> Password : <%= f.password_field :password%></p>
+
+	<p> Name : <%= f.text_field :name%></p>
+	<p> Mobile: <%= f.text_field :mobile%></p>
+	<p><%= f.submit "Signup"%>
+	<%end%>
+
+	<% if @user.errors.any? %>
+		<% @user.errors.full_messages.each do |x| %>
+		<%= x %><br>
+		<%end%>
+	<%end%>
+	<%= link_to "GOBACK" ,'/product'%>
+	<script>
+	function validates()
+	{
+
+	}
+	</script>

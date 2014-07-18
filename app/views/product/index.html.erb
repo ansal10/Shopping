@@ -1,0 +1,98 @@
+
+	
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+
+	
+
+	<% if @createuser.present? %>
+		<h2>signup successfull</h2><br><br>
+	<% end%>
+
+	<% if session[:username] != nil %>
+	
+	<% if session[:username] =="anas" %>
+	 	<%=link_to "add elements" , '/product/addnewelementsform' %>
+	<%end%>
+	
+	<%else%>
+	
+	<% end -%>
+	
+	
+
+
+
+<div class="container">
+            
+            <!--<h1>Original Hover Effects <span>with CSS3 Transitions and Animations</span></h1>
+            
+            <div class="main">
+                <div class="view view-first">
+                    <img src="http://cdn2.gsmarena.com/vv/pics/t-mobile//T-Mobile-Comet-1.jpg" width="200" height="200">
+                    <div class="mask">
+                        <h2>Hover Style #1</h2>
+                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                        <a href="#" class="info">Read More</a>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="main">
+                <div class="view view-first">
+                    <img src="http://cdn2.gsmarena.com/vv/pics/t-mobile//T-Mobile-Comet-1.jpg" width="200" height="200">
+               /div>  
+            </div>
+            <div class="main">
+                <div class="view view-first">
+                    <img src="http://cdn2.gsmarena.com/vv/pics/t-mobile//T-Mobile-Comet-1.jpg" width="200" height="200">
+                    <div class="mask">
+                        <h2>Hover Style #1</h2>
+                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                        <a href="#" class="info">Read More</a>
+                    </div>
+                </div>  
+            </div>
+            <div class="main">
+                <div class="view view-first">
+                    <img src="http://cdn2.gsmarena.com/vv/pics/t-mobile//T-Mobile-Comet-1.jpg" width="200" height="200">
+                    <div class="mask">
+                        <h2>Hover Style #1</h2>
+                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                        <a href="#" class="info">Read More</a>
+                    </div>
+                </div>  
+            </div>-->    
+                
+            <h3>Online Shopping <span>Buy product cheaper </span></h3>
+            <% @item.each do |f| %>
+            <div class="main">
+                <div class="view view-first">
+                    
+                    <img src=<%=f.image%> width="200" height="300" alt "error loading image" >
+                   
+                    <div class="mask">
+                        <h2><%=f.name%></h2><br>
+                        <a href=<%='/product/'+f.id.to_s+'/productview'%> ><h2>Buy Now</h2></a>
+                        <p>
+                        
+                        	<h3>
+                        	MRP: <%= f.mrp%><br>
+                        	Our Price: <%= ((100-f.discount)*f.mrp)/100.0 %><br>
+                        	Discount :<%=f.discount%>%<br> 
+                        	Quantity left : <%=f.quantity%> only <br></h3>
+                     
+                        </p>
+                        <a href="#" class="info">Read More</a>
+                    </div>
+                </div>  
+            </div>
+            <%end%>
+ </div>
+
+ 
+
+
+
+
+

@@ -1,0 +1,169 @@
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+
+<script type="text/javascript">
+
+function confirmselectedaddressajax(userid , itemid , quantity , profileid){
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById('mydiv').innerHTML=xmlhttp.responseText;
+		}
+	}
+	url = "/product/confirmselectedaddressajax?profileid="+profileid+"&itemid="+itemid+"&itemquantity="+quantity;
+	xmlhttp.open("GET" , url , true);
+	xmlhttp.send();
+
+}
+
+function confirmpickupajax(itemid , quantity , address , pincode , mobile){
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById('mydiv').innerHTML=xmlhttp.responseText;
+		}
+	}
+	url = "/product/confirmpickupajax?itemid="+itemid+"&itemquantity="+quantity+"&address="+address+"&mobile="+mobile+"&pincode="+pincode;
+	xmlhttp.open("GET" , url , true);
+	xmlhttp.send();
+}
+
+function registeraddressajax(itemid , quantity , address , pincode , mobile){
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById('mydiv').innerHTML=xmlhttp.responseText;
+		}
+	}
+	url = "/product/registeraddressajax?itemid="+itemid+"&itemquantity="+quantity+"&address="+address+"&mobile="+mobile+"&pincode="+pincode;
+	xmlhttp.open("GET" , url , true);
+	xmlhttp.send();
+}
+
+function ajaxcall(url , userid , itemid , itemquantity){
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById('mydiv').innerHTML=xmlhttp.responseText;
+		}
+	}
+	url = "/product/addnewshippingaddress?userid="+userid+"&itemid="+itemid+"&itemquantity="+itemquantity;
+	xmlhttp.open("GET" , url , true);
+	xmlhttp.send();
+}
+
+function pickup(userid , itemid , itemquantity){
+	var	add1 = 'DLF SEZ it Park <br> ramapuram - 600089 <br> chennai <br>TamilNadu<br><br>'
+	var add2 = 'Hitech City <br> madhapur - 506004 <br> Hyderabad<br>Andhrapradesh<br><br>'
+
+	var v = "<input type='radio' id='add1' name='pickupaddress' value='DLF SEZ it Park ramapuram - chennai TamilNadu|600809|8769456732' checked=false >" +add1+"<input type='radio' id='add2' name='pickupaddress' value='Hitech City madhapur - Hyderabad Andhrapradesh|506004|9879876564' checked=false >" +add2 +"<br><br>";
+	var button = "Confirm : <input type='button' onclick = 'confirmpickup("+userid+","+itemid+","+itemquantity+")' value='click to confirm'><br>";
+	v = v+button;
+	
+
+	document.getElementById("shippingdetails").innerHTML="<h4>"+v+"</h4>";
+}
+
+function confirmpickup(userid , itemid , quantity){
+	
+	var inputs = document.getElementById("shippingdetails").getElementsByTagName('input')
+	for(var i = 0 ; i < inputs.length;i++){
+		if(inputs[i].checked)
+			{
+				if(confirm("schedule pickup for"+inputs[i].value))
+					{
+						add = inputs[i].value.split("|");
+						confirmpickupajax(itemid , quantity , add[0].trim() , add[1].trim() , add[2].trim());
+					}
+			}
+	}
+}
+
+function homedelievery( userid , itemid , quantity){
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById('shippingdetails').innerHTML="<h3>"+xmlhttp.responseText+"</h3><br>"+"<input type='button' onclick = 'confirmselectedaddress("+userid+","+itemid+","+quantity+")' value='confirm selected address'><br><br><br>" +"<div id='addnewaddress'><input type='button' value = 'add new address' onclick='loadnewaddress("+userid+","+itemid+","+quantity+")'> </div>";
+		}
+	}
+	url = "/product/useraddress?id="+userid;
+	xmlhttp.open("GET" , url , true);
+	xmlhttp.send();
+}
+
+function loadnewaddress(userid,itemid,quantity){
+	var v = "Address: <input type='text' id='address' > <br>"+"Pincode: <input type='text' id='pincode'><br>"+"Mobile: <input type='text' id='mobile' ><br>" + "<input type = 'button' value='registeraddress' onclick=registeraddress("+userid+","+itemid+","+quantity+")>";
+	document.getElementById("shippingdetails").innerHTML=document.getElementById("shippingdetails").innerHTML+ v;
+	document.getElementById("addnewaddress").innerHTML="";
+
+}
+
+function registeraddress(userid,itemid,quantity){
+
+	var address=document.getElementById("address").value.trim();
+	var pincode=document.getElementById("pincode").value.trim();
+	var mobile=document.getElementById("mobile").value.trim();
+	if(address=="")
+		alert("address no blank");
+	else if(mobile=="")
+		alert("mobile no blank");
+	else if(pincode=="")
+		alert("pincode no blank");
+	else{
+		if(confirm(address+"|"+pincode+"|"+mobile))
+		{
+			registeraddressajax(itemid,quantity,address,pincode,mobile);
+		}
+	}
+
+}
+
+function confirmselectedaddress(userid , itemid , quantity){
+	var inputs = document.getElementById('shippingdetails').getElementsByTagName('input');
+	var flag=0;
+	for (var i = 0; i < inputs.length; i++) {
+		if(inputs[i].checked)
+			{
+				if(confirm("Are You Sure"))
+				{
+					confirmselectedaddressajax(userid , itemid , quantity , inputs[i].value);
+				}
+				flag=1;
+			}
+	}
+	if(flag==0) alert("please select any address first");
+}
+	
+</script>
+
+<img src=<%=@item.image%> height="300" width="200" />
+<h3>
+<%=@item.name%><br>
+Price : <%=(@item.mrp*((100-@item.discount)/100.0))%><br>
+Quantity : <%= params[:item][:quantity] %><br>
+</h3>
+
+<div id="shipping">
+PickUp : <input type="radio" name="shipping" onclick="pickup(<%=session[:id].to_s+","+@item.id.to_s+","+params[:item][:quantity].to_s%>)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+HomeDelievery<input type="radio" name="shipping" onclick="homedelievery(<%=session[:id].to_s+","+@item.id.to_s+","+params[:item][:quantity].to_s%>)"><br><br>
+<div id="shippingdetails"></div>
+</div>
+
+<button type="button" value="click to load ajax" onclick="ajaxcall(<%=session[:id].to_s+","+@item.id.to_s+","+params[:item][:quantity].to_s%>)">click to load ajax</button>-->
+
+<div id="mydiv"></div>

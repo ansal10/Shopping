@@ -1,0 +1,4 @@
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+
+<img src = 

@@ -1,0 +1,8 @@
+<% @profile.each do |x| %>
+	
+	
+	<input type="radio" name="shippingaddress" id= '<%=x.id%>' value = '<%=x.id%>' >
+	<%=x.address.to_s %><br>
+	pincode :<%=x.pincode.to_s %><br>
+	Mobile :<%=x.mobile.to_s %><br><br>
+<%end%>

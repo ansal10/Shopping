@@ -1,0 +1,27 @@
+#top {
+width: 1400px;
+margin: auto;
+height: 300px;
+background: #222222
+}
+#topLogo {
+text-align: left;
+float: left;
+margin-top: 20px;
+margin-left: 10px;
+}
+#topnavTut {
+height: 20px;
+width: 1190px;
+margin: auto;
+word-spacing: 12px;
+font-size: 12px;
+padding-left: 10px;
+padding-right: 20px;
+padding-top: 5px;
+background-color: #d3d3d3;
+}
+#topnav {
+height: 25px;
+background-color: #d3d3d3;
+}

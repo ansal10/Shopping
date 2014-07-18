@@ -1,0 +1,33 @@
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+
+
+
+
+<%if session[:username] == nil %>
+	<meta http-equiv="refresh" content="0; http://localhost:3000/product/login">
+<%end%>
+
+<% if @item.present? %>
+	<center><img src=<%=@item.image%> height = "500" width = "500" alt="error">
+			<h3><span>
+                        	MRP: <%= @item.mrp%><br>
+                        	Our Price: <%= ((100-@item.discount)*@item.mrp)/100.0 %><br>
+                        	Discount :<%=@item.discount%>%<br> 
+                        	Quantity left : <%=@item.quantity%> only <br>
+            </span></h3>
+            <%if session[:errors].present? %>
+            	<%session[:errors].each do |x| %>
+            	<%=x%><br>
+            	<%end%>
+            <%session[:errors]=[]%>
+            <%end%>
+     <%= form_for( :item , :url => {:controller => "product" , :action => "checkout" , :itemid => @item.id}) do |f|%>
+     <%= f.text_field :quantity , :value=>1%>
+     <%=f.submit "proceed to check out"%>
+     <%end%>
+	</center>
+
+<%else%>
+<p> Sorry Error Loading Product </p>
+<%end%>

@@ -1,0 +1,42 @@
+
+
+<div id="top">
+	<div id="topLogo">
+		<a href="http://localhost:3000/product">
+			<img src="http://englishwithatwist.com/wp-content/uploads/2014/04/Blog_set-shopping-bags-word-shopping-29218670-1.jpg" alt="shopping" width="1200" height="200" style="border:0;">
+		</a>
+	</div>
+</div>
+<div id="topnav">
+	<div id="topnavTut" class="notranslate">
+		<a class="topnav" target="_top" href="/product">HOME </a>
+		<!--<a class="topnav" target="_top" href="/html/default.asp">HTML </a>
+		<a class="topnav" target="_top" href="/css/default.asp">CSS </a>
+		<a class="topnav" target="_top" href="/js/default.asp">JAVASCRIPT </a>
+		<a class="topnav" target="_top" href="/sql/default.asp">SQL </a>
+		<a class="topnav" target="_top" href="/php/default.asp">PHP </a>
+		<a class="topnav" target="_top" href="/jquery/default.asp">JQUERY </a>
+		<a class="topnav" target="_top" href="/xml/default.asp">XML </a>
+		<a class="topnav" target="_top" href="/aspnet/default.asp">ASP.NET </a>
+		<a class="topnav" target="_top" href="/sitemap/default.asp">MORE...</a>-->
+		<div style="float:right;word-spacing:0;">
+			<!--<a class="topnav" target="_top" href="/sitemap/sitemap_references.asp">REFERENCES</a>
+			<span style="letter-spacing:14px;"> |</span>
+			<a class="topnav" target="_top" href="/sitemap/sitemap_examples.asp"> EXAMPLES</a>-->
+			<%if session[:username] != nil %>
+				<span style="letter-spacing:14px;"> |</span>
+				<a class="topnav" target="_blank" > 
+				Welcome <%=session[:username]%>
+				</a>
+			<%else%>
+				<span style="letter-spacing:14px;"> |</span>
+				<a class="topnav" target="_top" href = "/product/login"> 
+				Signin 
+				</a>
+			<%end%> 
+			
+			<span style="letter-spacing:14px;"> |</span>
+			<a class="topnav" target="_top" href="/product/logout"> Signout</a>
+		</div>
+	</div>
+</div>

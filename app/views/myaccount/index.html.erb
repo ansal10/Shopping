@@ -1,0 +1,40 @@
+<style type="text/css" href="app/assets/stylesheets/header.css"></style>
+<%= render "header" %>
+<h1>Myaccount#index</h1>
+<p>Find me in app/views/myaccount/index.html.erb</p>
+<% if session[:username].present? %>
+	
+
+	<% @account.each do |y| %>
+		<% y.each do |x| %>
+		<img src=<%=Item.find(x.item_id).image%> height = "200" width="150">
+		Order id : <%= x.id%><br>
+		Quantity :<%= x.quantity%><br>
+		Delievery Type: <%= x.delieverytype%><br>
+		Status :<%= x.status%><br>
+		Item Id :<%= x.item_id%><br>
+		Address : <%=Profile.find(x.profile_id).address%><br>
+		Pincode : <%=Profile.find(x.profile_id).pincode%><br>
+		Mobile : <%=Profile.find(x.profile_id).mobile%><br><br>
+		<%end%>
+	
+	<%end%>
+
+	<h2> Pickup Orders </h2><br><br>
+	<%@pickup.each do |x|%>
+	<img src=<%=Item.find(x.item_id).image%> height = "200" width="150">
+		Order id : <%= x.id%><br>
+		Quantity :<%= x.quantity%><br>
+		Delievery Type: <%= x.delieverytype%><br>
+		Status :<%= x.status%><br>
+		Item Id :<%= x.item_id%><br>
+		Address : <%=x.address%><br>
+		Pincode : <%=x.pincode%><br>
+		Mobile : <%=x.mobile%><br><br>
+
+	<%end%>
+	
+<%else%>
+<p> <h1>please sign in first </h1></p>
+	<meta http-equiv="Refresh" content="3 ;url=http://localhost:3000/product">
+<%end%>
